@@ -1,0 +1,53 @@
+@font-face {
+    font-family: comic;
+    src: url(../assets/comic.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: comic;
+    text-align: center;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button#genereer {
+    font-size: 5vw;
+    height: 10vw;
+    width: 10vw;
+    border: black 3px solid;
+    border-radius: 100vw;
+    cursor: pointer;
+    background-color: white;
+}
+
+button#genereer:hover {
+    background-color: whitesmoke;
+}
+
+button#genereer:active {
+    background-color: silver;
+}
+
+input[type=range] {
+    width: 20%;
+}
+
+#outputtekst {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30vh;
+}
