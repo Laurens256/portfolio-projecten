@@ -47,9 +47,10 @@ void loop() {
     loopTimer = 0;
     }
 
-  if(drinkTimer > 1980) {
+  if(drinkTimer > 2) {
   digitalWrite(3, HIGH);
-  } else if(drinkTimer > 2) {
+  strobe(0, 255);
+  } else if(drinkTimer > 1860) {
     strobe(0, 255);
     } else if(drinkTimer > 1800) {
         for(int i=0; i<strip.numPixels(); i++) {
@@ -60,6 +61,7 @@ void loop() {
 
 if(loopTimer > 2860) {
   digitalWrite(3, HIGH);
+  strobe(255, 0);
   } else if(loopTimer == 2760) {
     strobe(255, 0);
     }  else if(loopTimer == 2700) {
