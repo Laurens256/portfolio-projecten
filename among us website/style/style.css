@@ -1,0 +1,1256 @@
+/*****************************
+setup
+*****************************/
+@font-face {
+    font-family: PTSans;
+    src: url(../assets/PTSans-Regular.ttf);
+}
+
+* {
+    font-family: PTSans;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--tekstkleur);
+}
+
+:root {
+    --wit: #ffffff;
+    --zwart: #000000;
+    --rood: #c61111;
+    --blauw: #2d75b6;
+    --headerblack: #111111;
+    --tekstkleur: #ffffff;
+    --tekstkleuralt: #000000;
+    --iconkleur: #ffffff;
+    --buttonblauw: #2d75b6;
+    --bodyachtergrond: #000000;
+    --mobilenavkopjes: #d3c7b5;
+    --footerblack: #1c1c1c;
+}
+
+
+
+/*****************************
+algemene styles
+*****************************/
+body {
+    color: var(--tekstkleur);
+    height: 100%;
+    max-width: 1700px;
+    margin: 0 auto;
+    background-color: var(--bodyachtergrond);
+}
+
+a {
+    display: block;
+    letter-spacing: 1px;
+    color: var(--tekstkleur);
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+button {
+    border-style: none;
+    color: var(--tekstkleur);
+    cursor: pointer;
+}
+
+input[type="email"]:hover:not(:focus) {
+    cursor: pointer;
+}
+
+footer section:nth-of-type(2) input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #2869a3;
+    border-color: var(--tekstkleuralt);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+/*****************************
+alles voor mobile nav toggle
+*****************************/
+body.navtoggle {
+    overflow-y: hidden;
+}
+
+body.navtoggle > nav {
+    visibility: visible;
+    position: fixed;
+    background: var(--headerblack);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    transition: linear .3s;
+}
+
+body.navtoggle > header nav ul:nth-of-type(2) li button span:first-of-type {
+    transform: translateY(.3em) rotate(45deg);
+}
+
+body.navtoggle > header nav ul:nth-of-type(2) li button span:nth-of-type(2) {
+    transform: translateY(-.3em) rotate(-45deg);
+}
+
+
+
+/*****************************
+header style
+*****************************/
+header nav {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    width: 100%;
+    background-color: var(--headerblack);
+    padding: 1em 0;
+    justify-content: space-around;
+} 
+
+header nav ul {
+    display: flex;
+    align-items: center;
+}
+
+header nav ul:first-of-type li:first-of-type {
+    display: flex;
+    align-items: center;
+}
+
+header nav ul:first-of-type li {
+    white-space: nowrap;
+}
+
+h1 {
+    display: inline;
+    letter-spacing: .2em;
+    font-size: 1.3em;
+}
+
+
+
+/*****************************
+nav voor binnen website
+*****************************/
+header nav ul:first-of-type {
+    position: relative;
+    gap: 3em;
+    font-size: 1.3em;
+}
+
+header nav ul:first-of-type li img {
+    width: 3em;
+    margin: -.5em .5em 0 0;
+}
+
+header nav ul:first-of-type li:not(:first-of-type) img {
+    width: .8em;
+    margin: 0 0 0 .3em;
+}
+
+
+
+/*****************************
+nav voor externe links
+*****************************/
+header nav ul:nth-of-type(2) {
+    gap: .5em;
+}
+
+ul li a svg {
+    width: 1.5em;
+    height: 1.5em;
+    min-height: 1.5em;
+    padding: .3em;
+    background-color: var(--tekstkleur);
+    border-radius: 10000000em;
+}
+
+ul li a svg:hover, ul li a:focus svg {
+    transition: all 200ms;
+    background-color: var(--blauw);
+}
+
+ul li a svg path {
+    fill: var(--tekstkleuralt);
+}
+
+ul li a svg:hover path, ul li a:focus svg path {
+    transition: all 200ms;
+    fill: var(--wit);
+}
+
+
+
+/*****************************
+hamburger icoon
+*****************************/
+header nav ul:nth-of-type(2) li:first-of-type button {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2em;
+    height: .8em;
+}
+
+header nav ul:nth-of-type(2) li:first-of-type button span {
+    background: var(--mobilenavkopjes);
+    width: 2em;
+    height: .2em;
+    transition: linear .3s;
+}
+
+
+
+/*****************************
+mobile nav (overlay)
+*****************************/
+body > nav {
+    visibility: hidden;
+    z-index: 3;
+    position: fixed;
+    transition: linear .3s;
+    top: -80%;
+    left: 0;
+    right: 0;
+    height: 80%;
+    background: var(--headerblack);
+    overflow-y: scroll;
+}
+
+body > nav > div {
+    z-index: 4;
+    width: 100%;
+    height: 5.05em;
+    background: var(--rood);
+    margin-bottom: 1em;
+}
+
+body > nav ul {
+    font-size: 1.4em;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    gap: .4em;
+}
+
+body > nav ul li:nth-of-type(7n+1) {
+    color: var(--mobilenavkopjes);
+    font-weight: bold;
+    letter-spacing: .1em;
+}
+
+body > nav ul li:nth-of-type(8n+6) {
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: .1em;
+}
+
+body > nav ul li div {
+    background:black;
+    width: 100%;
+    height: .2em;
+    margin: .4em 0;
+}
+
+body > nav ul li:last-of-type {
+    padding-bottom: 1em;
+}
+
+
+
+/*****************************
+ruimte tussen sections
+*****************************/
+main section:first-of-type ~ section {
+    margin-bottom: 4em !important;
+}
+
+
+
+/*****************************
+eerste section, rode banner
+*****************************/
+.amogus section:first-of-type {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 1em 0;
+    background-color: var(--rood);
+    color: var(--tekstkleuralt);
+}
+
+.amogus section:first-of-type a {
+    position: absolute;
+    display: flex;
+    right: 3em;
+    align-items: center;
+}
+
+.amogus section:first-of-type a img {
+    width: .6em;
+    margin-left: .5em;
+}
+
+.amogus section:first-of-type p:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+}
+
+.amogus section:first-of-type p, .amogus section:first-of-type a {
+    margin-left: 1em;
+    color: var(--wit);
+}
+
+
+
+/*****************************
+tweede section, watch trailer
+*****************************/
+.amogus section:nth-of-type(2), .amogusnieuws section:first-of-type {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    background-repeat: no-repeat;
+    background-size: auto 100vh;
+    background-position: center top;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 60em;
+}
+
+.amogus section:nth-of-type(2) {
+    background-image: url(../img/mainbackground.png);
+}
+
+.amogus section:nth-of-type(2) img {
+    height: 8em;
+}
+
+.amogus section:nth-of-type(2) svg, .amogusnieuws section:first-of-type svg {
+    position: absolute;
+    bottom: 0;
+}
+
+.amogus section:nth-of-type(2) svg path, .amogusnieuws section:first-of-type svg path {
+    fill: var(--bodyachtergrond);
+}
+
+.amogus section:nth-of-type(2) button {
+    z-index: 2;
+    margin-top: 2em;
+    text-align: center;
+    height: 2.2em;
+    background-color: var(--blauw);
+    color: var(--wit);
+    font-size: 1.5em;
+    padding: .5em 1.4em;
+    border-radius: 1em;
+}
+
+.amogus section:nth-of-type(2) button:hover, .amogusnieuws section:first-of-type button:hover {
+    text-decoration: underline;
+}
+
+.amogusnieuws section:first-of-type button {
+    z-index: 2;
+}
+
+
+
+/*****************************
+3e section, links voor game stores
+*****************************/
+.amogus section:nth-of-type(3) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 7px;
+    width: 70%;
+    justify-content: center;
+    align-self: center;
+}
+
+
+
+/*****************************
+4e section, uitleg tekst + iframe
+*****************************/
+.amogus section:nth-of-type(4) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.amogus section:nth-of-type(4) div {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.amogus section:nth-of-type(4) h2 {
+    letter-spacing: .04em;
+    font-size: 2.5em;
+}
+
+.amogus section:nth-of-type(4) p {
+    font-size: 1.5em;
+    margin-top: .5em;
+}
+
+.amogus section:nth-of-type(4) span {
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    padding-top: 56.25%;
+    margin-top: 3em;
+}
+
+.amogus section:nth-of-type(4) span iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+
+/*****************************
+5e section, nieuws
+*****************************/
+.amogus section:nth-of-type(5) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.amogus section:nth-of-type(5) h2 {
+    white-space: nowrap;
+    font-size: 1.8em;
+    margin-right: 2em;
+}
+
+.amogus section:nth-of-type(5) span {
+    display: inline-block;
+    margin: 1.3em 0 0 .2em;
+    height: .3em;
+    width: 7em;
+    background: var(--rood);
+}
+
+.amogus section:nth-of-type(5) article {
+    position: relative;
+    margin: 0 1em;
+}
+
+.amogus section:nth-of-type(5) article img {
+    opacity: 100;
+    border: .1em;
+    transition: ease-in .4s;
+    margin-top: 1.5em;
+}
+
+.amogus section:nth-of-type(5) article:first-of-type {
+    grid-column-start: 1;
+    /* grid-column-end: 1; */
+}
+
+.amogus section:nth-of-type(5) article h3 {
+    line-height: 1.5em;
+}
+
+.amogus section:nth-of-type(5) article p:first-of-type {
+    position: absolute;
+    display: inline;
+    top: 2em;
+    right: 0;
+    padding: .2em .7em;
+    border-radius: .2em;
+    letter-spacing: 1px;
+    background: var(--rood);
+    color: var(--wit);
+}
+
+.amogus section:nth-of-type(5) > a:last-of-type {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+    gap: .5em;
+}
+
+.amogus section:nth-of-type(5) > a img:last-of-type {
+    width: .8em;
+}
+
+
+
+/*****************************
+classlist voor inscroll nieuws
+*****************************/
+img.scrolleffect {
+    opacity: 0 !important;
+    margin-top: 8em!important;
+}
+
+
+
+
+
+
+
+
+
+
+/*****************************
+******************************
+nieuws pagina
+******************************
+*****************************/
+.amogusnieuws section:first-of-type {
+    background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)),
+    url(../img/arcanefinal.png);
+    text-align: center;
+}
+
+.amogusnieuws section:first-of-type h2 {
+    font-size: 2.5em;
+    color: var(--wit);
+}
+
+.amogusnieuws section:first-of-type button {
+    background: var(--blauw);
+    color: var(--wit);
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: .7em 2em;
+    border-radius: 10000000px;
+    margin-top: 2em;
+}
+
+.amogusnieuws section strong {
+    z-index: 2;
+    font-size: .8em;
+    padding: .3em .8em;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: var(--rood);
+    color: var(--wit);
+}
+
+.amogusnieuws section:first-of-type p {
+    display: flex;
+    margin-top: 7em;
+    gap: 1em;
+}
+
+
+
+/*****************************
+2 grote nieuwsartikelen
+*****************************/
+.amogusnieuws section:nth-of-type(2) {
+    max-width: 70em;
+    margin: 4em auto 0 auto;
+}
+
+.amogusnieuws section:nth-of-type(2) article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.amogusnieuws section:nth-of-type(2) article:first-of-type {
+    grid-auto-flow: dense;
+}
+
+.amogusnieuws section:nth-of-type(2) article:first-of-type a {
+    grid-column: 2 / 3;
+}
+
+.amogusnieuws section:nth-of-type(2) article:first-of-type div {
+    grid-column: 1 / 2;
+}
+
+.amogusnieuws section:nth-of-type(2) article img, .amogusnieuws section:nth-of-type(3) article img {
+    border-radius: 1em;
+    transition: ease-in .4s;
+    opacity: 100%;
+}
+
+.amogusnieuws section:nth-of-type(2) article h3 {
+    font-size: 2em;
+    margin: .5em 0;
+}
+
+.amogusnieuws section:nth-of-type(2) article div p:first-of-type {
+    display: flex;
+    margin-top: 1.5em;
+    gap: 1em;
+}
+
+.amogusnieuws section:nth-of-type(2) > div {
+    width: 80%;
+    height: .1em;
+    background: var(--tekstkleur);
+    margin: 3em auto;
+}
+
+
+
+/*****************************
+all news, derde section
+*****************************/
+.amogusnieuws section:nth-of-type(3) {
+    width: 90%;
+    margin: 0 auto;
+
+}
+
+.amogusnieuws section:nth-of-type(3) ul {
+    display: flex;
+    background: var(--bodyachtergrond);
+    width: 100%;
+    overflow-x: auto;
+    gap: .9em;
+    margin-top: .5em;
+    padding: 1em 0;
+}
+
+body::-webkit-scrollbar-track {
+    background: red;
+    color: red;
+    border-radius: 10px;
+}
+
+.amogusnieuws section:nth-of-type(3) ul li button {
+    color: var(--mobilenavkopjes);
+    background: var(--bodyachtergrond);
+    border: solid 2px var(--mobilenavkopjes);
+    border-radius: 10000px;
+    font-size: 1.1em;
+    min-width: 4em;
+    padding: .2em 1em;
+    width: max-content;
+}
+
+.amogusnieuws section:nth-of-type(3) ul li button.activefilter {
+    color: var(--bodyachtergrond);
+    background: var(--mobilenavkopjes);
+    border-color: var(--bodyachtergrond);
+}
+
+.amogusnieuws section:nth-of-type(3) article.hidden {
+    display: none;
+}
+
+.amogusnieuws section:nth-of-type(3) > div.hidden {
+    display: none;
+}
+
+.amogusnieuws section:nth-of-type(3) ul li button:hover, .amogusnieuws section:nth-of-type(3) ul li button:focus {
+    color: var(--bodyachtergrond);
+    background: var(--mobilenavkopjes);
+    border-color: var(--bodyachtergrond);
+}
+
+.amogusnieuws section:nth-of-type(3) > article {
+    position: relative;
+    display: grid;
+    width: 90%;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.amogusnieuws section:nth-of-type(3) > article img {
+    width: 70%;
+    transition: all .4s;
+}
+
+/* hier moet een beter manier voor zijn */
+.amogusnieuws section:nth-of-type(3) > article img:hover, .amogusnieuws section:nth-of-type(3) > article img:focus, 
+.amogusnieuws section:nth-of-type(2) > article img:hover, .amogusnieuws section:nth-of-type(2) > article img:focus{
+    transform: scale(.9, .9);
+}
+
+.amogusnieuws section:nth-of-type(3) article > strong {
+    position: absolute;
+    top: .2em;
+    left: .2em;
+}
+
+.amogusnieuws section:nth-of-type(3) article > div small {
+    font-weight: bold;
+}
+
+.amogusnieuws section:nth-of-type(3) article > div {
+    display: flex;
+    grid-column: span 2;
+    flex-direction: column;
+    gap: .5em;
+    margin-left: 2em;
+}
+
+.amogusnieuws section:nth-of-type(3) article p {
+    font-size: 1.2em;
+}
+
+.amogusnieuws section:nth-of-type(3) > div {
+    grid-column: 1 / 3;
+    margin: 3em 0;
+    height: .05em;
+    background: var(--tekstkleur);
+}
+
+.amogusnieuws section:nth-of-type(3) > button {
+    color: var(--tekstkleur);
+    background: var(--bodyachtergrond);
+    border: solid 2px var(--tekstkleur);
+    border-radius: 999999px;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: .5em 1.5em;
+    margin: 0 auto;
+    display: block;
+    transition: all .3s;
+}
+
+.amogusnieuws section:nth-of-type(3) > button:hover, .amogusnieuws section:nth-of-type(3) > button:focus {
+    color: var(--bodyachtergrond);
+    background: var(--tekstkleur);
+    border: solid 2px var(--bodyachtergrond);
+}
+
+
+
+/*****************************
+footer
+*****************************/
+footer {
+    display: flex;
+    /* flex-flow: column wrap; */
+    flex-wrap: wrap;
+}
+
+
+
+/*****************************
+1e footer section, see faqs
+*****************************/
+footer section:first-of-type {
+    text-align: center;
+    background: var(--blauw);
+    padding: 3em 0;
+    color: var(--wit);
+    width: 60%;
+}
+
+footer section:first-of-type p {
+    margin: 0 auto;
+    width: 90%;
+    font-size: 1.6em;
+}
+
+footer section:first-of-type a {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--blauw);
+    background: var(--wit);
+    display: inline-block;
+    padding: .8em 2em;
+    border-radius: 999em;
+    margin-top: 1.5em;
+}
+
+
+
+/*****************************
+2e footer section, question about innersloth
+*****************************/
+footer section:nth-of-type(2) {
+    background: var(--footerblack);
+    color: var(--mobilenavkopjes);
+    padding: 2em 0;
+    font-size: 1.6em;
+    text-align: center;
+    width: 40%;
+}
+
+footer section:nth-of-type(2) > p {
+    margin-bottom: 1.5em;
+}
+
+footer section:nth-of-type(2) form {
+    display: inline;
+    position: relative;
+}
+
+footer section:nth-of-type(2) label {
+    position: absolute;
+    top: -.6em;
+    left: 2em;
+    background: var(--footerblack);
+    font-size: .6em;
+    font-weight: bold;
+    padding: 0 .3em;
+}
+
+footer section:nth-of-type(2) input[type="email"] {
+    width: 70%;
+    padding: 0 1em;
+    max-width: 20em;
+    height: 2.3em;
+    background: var(--footerblack);
+    border: solid 1px var(--mobilenavkopjes);
+    border-radius: 1.3em;
+    color: var(--mobilenavkopjes);
+    font-size: .7em;
+}
+
+footer section:nth-of-type(2) input[type="submit"] {
+    background: var(--blauw);
+    width: 3em;
+    height: 3.2em;
+    border: solid 1px var(--mobilenavkopjes);
+    border-radius: 0 1.3em 1.3em 0;
+    position: absolute;
+    right: 0;
+    background-image: url(../img/ico/ico-arrow-right-big-white.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+
+footer section:nth-of-type(2) form p {
+    color: red;
+    display: none;
+    font-size: .6em;
+    margin-top: .5em;
+    margin-bottom: -1.8em;
+}
+
+
+/* css manier om form te valideren, class is om het op 1 van de 2 paginas te laten werken  */
+footer.nieuwspagina section:nth-of-type(2) form input[type="email"]:invalid:focus ~ p:first-of-type {
+    color: red;
+    display: block;
+    font-size: .6em;
+    margin-top: .5em;
+}
+
+footer.nieuwspagina section:nth-of-type(2) form input[type="email"]:valid:focus ~ p:last-of-type {
+    color: green;
+    display: block;
+    font-size: .6em;
+    margin-top: .5em;
+}
+
+
+
+/*****************************
+3e section, lijst met links  
+*****************************/
+footer section:last-of-type {
+    background: var(--headerblack);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2em 5%;
+    width: 100%;
+}
+
+footer section:last-of-type div:last-of-type p {
+    display: inline;
+}
+
+footer section:last-of-type ul {
+    margin: 0 2em;
+}
+
+footer section:last-of-type ul li:first-child {
+    font-size: .9em;
+    font-weight: bold;
+}
+
+footer section:last-of-type ul li {
+    font-size: .8em;
+}
+
+footer section:last-of-type button {
+    position: relative;
+    height: 1.3em;
+    width: 2.8em;
+    padding: .1em;
+    background: #4f4f4f;
+    border-radius: 999999px;
+    margin: 0 1em;
+}
+
+footer section:last-of-type button span {
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    border-radius: 999999px;
+    background: #d3c7b5;
+    top: .15em;
+    right: .1em;
+    transition: all linear .3s;
+}
+
+footer section:last-of-type ul:last-of-type {
+    display: flex;
+    margin-bottom: 5em;
+    gap: .8em;
+}
+
+footer section:last-of-type button:hover {
+    transition: all .3s;
+    background: var(--blauw);
+}
+
+/* animatie voor darkmode toggle */
+html.lightmode footer section:last-of-type button span {
+    transform: translateX(-150%);
+}
+
+
+
+/*****************************
+kirby animatie easter egg, zou mooier kunnen zijn met rotate(720deg) maar t lukt niet
+*****************************/
+body.succ header nav {
+    z-index: -1;
+}
+
+body.succ {
+    overflow: hidden;
+}
+
+body.succ main {
+    transform: scale(0);
+    transform-origin: 90vw 2em;
+    /* transform: rotate(720deg) scale(0); */
+    transition: all 5s;
+    z-index: 100;
+}
+
+body > :first-child {
+    visibility: hidden;
+    position: fixed;
+    top: -100em;
+    right: -100em;
+    transition: all .2s;
+}
+
+body.succ > :first-child {
+    visibility: visible;
+    transform: rotate(-45deg);
+    right: -12em;
+    top: -2em;
+}
+
+
+
+/*****************************
+mobile styles, media query   
+*****************************/
+@media (min-width: 320px) and (max-width: 799px) {
+/*****************************
+nav voor mobile
+*****************************/
+header nav ul:nth-of-type(-n+2) li + li {
+    display: none;
+}
+
+header nav ul:nth-of-type(2) li:first-of-type button {
+    background: none;
+    display: flex;
+}
+
+
+
+/*****************************
+1e section rode banner, plaatsing
+*****************************/
+.amogus section:first-of-type a {
+    position: static;
+}
+
+
+/*****************************
+sections met grote background img
+*****************************/
+.amogus section:nth-of-type(2), .amogusnieuws section:first-of-type {
+    height: 60vh;
+    background-size: auto 65vh;
+    background-position: bottom;
+}
+
+.amogus section:nth-of-type(2) {
+    background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)),
+    url(../img/mainbackground.png);
+}
+
+.amogus section:nth-of-type(2) img {
+    margin-top: 15em;
+    height: auto;
+    width: 85vw;
+}
+
+.amogusnieuws section:nth-of-type(2) article:first-of-type a {
+    grid-column: auto;
+}
+
+
+
+/*****************************
+algemeen (breedte, lettergrootte)
+*****************************/
+.amogus section:nth-of-type(3) {
+    width: 100%;
+}
+
+.amogus section:nth-of-type(4) div {
+    width: 90%;
+}
+
+.amogus section:nth-of-type(4) h2 {
+    font-size: 2em;
+}
+
+
+
+/*****************************
+die 3 kleine artikelen
+*****************************/
+.amogus section:nth-of-type(5) {
+    width: 90%;
+    grid-template-columns: 1fr 1fr;
+}
+
+.amogus section:nth-of-type(5) h2 {
+    white-space: normal;
+    font-size: 1.8em;
+    max-width: 100%;
+    margin-right: 0;
+    grid-column: 1;
+}
+
+.amogus section:nth-of-type(5) span {
+    justify-self: end;
+}
+
+.amogus section:nth-of-type(5) article:first-of-type {
+    grid-column: span 2;
+}
+
+.amogus section:nth-of-type(5) article:first-of-type h3 {
+    font-size: 2em;
+}
+
+
+
+
+
+/*****************************
+******************************
+nieuws pagina
+******************************
+*****************************/
+.amogusnieuws section:nth-of-type(2) article {
+    grid-template-columns: 1fr;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.amogusnieuws section:nth-of-type(3) > article {
+    grid-template-columns: 1fr 1fr;
+}
+
+.amogusnieuws section:nth-of-type(3) > article img {
+    width: 100%;
+}
+
+.amogusnieuws section:nth-of-type(3) article > div {
+    grid-column: span 1;
+}
+
+.amogusnieuws section:nth-of-type(3) article > div p {
+    display: none;
+}
+
+
+
+/*****************************
+footer mobile
+*****************************/
+footer section:first-of-type {
+    width: 100%;
+}
+
+footer section:nth-of-type(2) {
+    width: 100%;
+}
+
+footer section:last-of-type ul {
+    flex-basis: 50%;
+    margin: 1em 0;
+}
+
+footer section:last-of-type ul:last-of-type {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 80%;
+    justify-content: center;
+}
+
+footer section:last-of-type ul:last-of-type li a svg {
+    width: 2.3em;
+    height: 2.3em;
+}
+
+
+/*****************************
+kirby positioning voor mobile
+*****************************/
+body.succ > :first-child {
+    right: -7.5em;
+    top: 2em;
+}
+
+}
+
+
+
+/*****************************
+ipad/landscape format
+*****************************/
+@media (min-width: 800px) and (max-width: 1000px) {
+main {
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+/*****************************
+header / footer dingen
+*****************************/
+header ul:last-of-type {
+    display: none;
+}
+
+header ul:first-of-type li:first-of-type img {
+    display: none;
+}
+
+footer section:last-of-type ul:last-of-type {
+    font-size: 1.5em;
+}
+
+footer section:last-of-type {
+    row-gap: 2em;
+}
+
+footer section:last-of-type ul:last-of-type {
+    margin-bottom: 0;
+}
+
+
+/*****************************
+algemene groottes
+*****************************/
+.amogus section:nth-of-type(4) div {
+    width: 70%;
+}
+
+.amogus section:nth-of-type(5) {
+    width: 100%;
+}
+
+.amogusnieuws section:nth-of-type(2) article {
+    gap: 2em;
+}
+
+.amogusnieuws section:nth-of-type(3) > article img {
+    width: 100%;
+}
+
+.amogusnieuws section:nth-of-type(3) > article p {
+    height: 5em;
+    overflow-y: hidden;
+}
+
+
+/*****************************
+kirby positioning tablet
+*****************************/
+body.succ main {
+    transform-origin: 80vw 2em;
+}
+}
+
+
+
+/*****************************
+reduced motion
+*****************************/
+@media (prefers-reduced-motion) {
+* {
+    transition: none !important;
+}
+
+
+/*****************************
+stopt inschuiven effect voor artikelen
+*****************************/
+.amogus section:nth-of-type(5) article img {
+    margin-top: 0;
+    opacity: 100;
+}
+}
+
+
+
+/*****************************
+dark mode
+*****************************/
+:root.lightmode {
+    --headerblack: #ffffff;
+    --tekstkleur: #000000;
+    --tekstkleuralt: #ffffff;
+    --iconkleur: #000000;
+    --rood: #c61111;
+    --blauw: #2d75b6;
+    --buttonblauw: #ffffff;
+    --bodyachtergrond: #ffffff;
+    --mobilenavkopjes: #000000;
+    --footerblack: #f2efeb;
+}
