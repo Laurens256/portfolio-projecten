@@ -8,6 +8,10 @@
     src: url(../assets/OpenSans-VariableFont_wdth\,wght.ttf);
 }
 
+:root {
+    --huidigespeler: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -22,11 +26,11 @@ a {
 #startschermoverlay {
     z-index: 999;
     font-family: OpenSans;
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     background: white;
     text-align: center;
     display: flex;
@@ -41,16 +45,17 @@ a {
     top: 2em;
 }
 
-#startschermoverlay > div:first-of-type h1 {
+#startschermoverlay h1 {
     font-size: 3rem;
 }
 
-#startschermoverlay > div:first-of-type p {
+#startschermoverlay p {
     font-size: 1.2rem;
 }
 
-#startschermoverlay > div:first-of-type p a {
+#startschermoverlay p a {
     display: inline;
+    color: blue;
 }
 
 #startschermoverlay ul {
@@ -117,12 +122,12 @@ main {
     position: absolute;
     width: 93%;
     height: 80%;
-    top: 4.3em;
+    top: 10vh;
 }
 
 #infobox > ul li {
+    display: none;
     height: 20%;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2em;
@@ -146,10 +151,11 @@ main {
 }
 
 #infobox h2 {
-    font-size: 1.3vw;
+    font-size: 1.1vw;
 }
 
 #watgebeurter {
+    font-size: 1vw;
     white-space: wrap;
 }
 
@@ -207,7 +213,6 @@ main {
     left: 0;
     right: 0;
     z-index: 998;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,8 +249,26 @@ main {
 
 .bordcontainer div {
     height: 9.5vh;
-    border: solid black .2vh;
+    border: solid black 2px;
     background-color: white;
+    margin: -1px;
+}
+
+.bordcontainer div.actiefvakje {
+    animation: actiefvakje .7s;
+    animation-iteration-count: 2;
+}
+
+@keyframes actiefvakje {
+    0% {
+        background-color: var(--huidigespeler);
+    }
+    50% {
+        background-color: white;
+    }
+    100% {
+        background-color: var(--huidigespeler);
+    }
 }
 
 .gans {
@@ -276,6 +299,79 @@ main {
       "v22 v23 v24 v25 v26 v27 v28 v29 v30 v1"
       "v0 v0 v0 v0 v0 v0 v0 v0 v0 v0";
   }
+
+
+@media screen and (max-width: 768px) {
+    #startschermoverlay h1 {
+        font-size: 2em;
+    }
+    #startschermoverlay h3:first-of-type {
+        margin-top: 5em;
+    }
+    #startschermoverlay ul {
+        gap: 1em;
+    }
+
+    main {
+        margin: 0;
+        flex-direction: column;
+    }
+    .bordcontainer {
+        width: 99%;
+        margin: 0 auto;
+    }
+    .bordcontainer div {
+        height: 3.5em;
+    }
+    #infobox {
+        margin: 0 auto;
+        width: 99%;
+        height: 5em;
+        padding: 0;
+    }
+    #infobox div > * {
+        font-size: 1em;
+    }
+    #infobox ul {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    #infobox ul li {
+        width: 25%;
+        height: 2em;
+        /* font-size: 1em; */
+    }
+
+    #gooidobbelsteen {
+        width: 6em;
+        height: 6em;
+        position: fixed;
+        top: 14.5em;
+    }
+
+    #gooidobbelsteen img {
+        width: 5.5em;
+    }
+
+    #dobbelstenenframe {
+        align-items: end;
+    }
+    #dobbelstenenframe ul li img {
+        width: 7em;
+    }
+    
+    @keyframes showdobbels {
+        from {
+            width: 0;
+        }
+        to {
+            width: 7em;
+        }
+    }
+}
+
+
   
 #v63 { 
     grid-area: v63;

@@ -8,6 +8,9 @@ const playersAantal = document.querySelectorAll(".playersaantal");
 const computerOfMens = document.querySelectorAll(".computerofmens");
 
 const actieTekst = document.querySelector("#watgebeurter");
+const infoboxSpelers = document.querySelectorAll("#infobox ul li");
+
+const rootElement = document.querySelector(":root");
 
 const players = {
     "1": 0,
@@ -74,7 +77,11 @@ function choosePlayers(event) {
         tegenComputer = false;
     }   else {
         startSchermOverlay.style.display = "none";
-        console.log(players);
+
+        for(let i=0; i<bezet.length; i++) {
+            infoboxSpelers[i].style.display = "flex";
+        }
+
         return;
     }
     event.currentTarget.classList.add("active");
@@ -85,13 +92,16 @@ function choosePlayers(event) {
 function determineTurn() {
     if (beurtBezig == true) {
         return;
+    }   else if(gameOver == true) {
+        if(userTurn == 1) {
+            userTurn = 5;
+        }
+        alert("Speler " + (userTurn - 1) + " heeft gewonnen");
+        return;
     }   else {
         beurtBezig = true;
     }
-    if (gameOver == true) {
-        alert("Speler " + (userTurn) + " heeft gewonnen");
-        return;
-    }
+    rootElement.style.setProperty("--huidigespeler", vakjeKleur[userTurn]);
     dobbelen(userTurn);
 
     if(userTurn < Object.keys(players).length) {
@@ -113,7 +123,10 @@ function dobbelen(userTurn) {
     const dobbel1 = Math.floor(Math.random() * (6) + 1);
     const dobbel2 = Math.floor(Math.random() * (6) + 1);
     let dobbelTotaal = dobbel1 + dobbel2;
-    // dobbelTotaal = 9;   //bepaal dobbelnr (voor tests)
+
+    // if(userTurn == 1) {
+    //     dobbelTotaal = 5;   //bepaal dobbelnr (voor tests)
+    // }
 
 
     actieTekst.textContent = "Speler " + userTurn + " gooit " + dobbelTotaal;
@@ -132,17 +145,17 @@ function dobbelen(userTurn) {
     //speciale regels zodat je niet via de ganzen in een keer wint
     if(players[userTurn] == 0 && dobbelTotaal == 9) {
         if(dobbel1 == 6 || dobbel1 == 3 && dobbel2 == 6 || dobbel2 == 3) {
-            actieTekst.textContent = "Speler " + userTurn + " heeft 6 en 3 gegooid, ga door naar 26";
+            actieTekst.textContent = "Speler " + userTurn + " gooit 6 en 3, ga door naar 26";
             dobbelTotaal = 26;
         }   else {
             dobbelTotaal = 53;
-            actieTekst.textContent = "Speler " + userTurn + " heeft 5 en 4 gegooid, ga door naar 53";
+            actieTekst.textContent = "Speler " + userTurn + " gooit 5 en 4, ga door naar 53";
         }
     }
 
-    setTimeout(function smallPause() {
+    // setTimeout(function smallPause() {
         beurtenOverslaan(userTurn, dobbelTotaal);
-    }, 1000);
+    // }, 1000);
 }
 
 
@@ -150,15 +163,16 @@ function dobbelen(userTurn) {
 //kijkt of je niet in de put/gevangenis/herberg zit
 function beurtenOverslaan(userTurn, dobbelTotaal) {
     if (beurtenVast[userTurn] == 0) {
-        movePawns(userTurn, dobbelTotaal);
+        setTimeout(function smallPause() {
+            movePawns(userTurn, dobbelTotaal);
+            }, 1000);
     }   else {
         actieTekst.textContent = "Speler " + userTurn + " zit nog " + beurtenVast[userTurn] + " beurt(en) vast";
+        beurtenVast[userTurn] -= 1;
         if(userTurn !== parseInt(Object.keys(players)[Object.keys(players).length-1]) && tegenComputer == true) {
             setTimeout(function smallPause() {
             determineTurn();
             }, 1000);
-
-        beurtenVast[userTurn] -= 1;
         }
         gooiDobbelsteen.classList.remove("gooidobbel");
         beurtBezig = false;
@@ -173,7 +187,14 @@ function movePawns(userTurn, dobbelTotaal, hoeveelVakjes) {
         hoeveelVakjes = dobbelTotaal;
         movePause = 0;
     }   else {
-        movePause = 300;
+        movePause = 500;
+        bordTotaal[players[userTurn]].classList.add("actiefvakje");
+
+        setTimeout(function () {
+            for(let i=0; i<bordTotaal.length; i++) {
+            bordTotaal[i].classList.remove("actiefvakje");
+            }
+        }, 1000);
     }
     bezet[userTurn - 1] = 999;
     //zorgt ervoor dat maar 1 vakje wordt gekleurd en dat het vakje bestaat (tussen 0 en 63)
@@ -219,8 +240,12 @@ function specialeVakjes(userTurn, dobbelTotaal) {
     //check voor winnaar
     if(players[userTurn] == 63) {
         gameOver = true;
+        beurtBezig = false;
         actieTekst.textContent = "Speler " + userTurn + " heeft gewonnen";
         bordTotaal[63].style.backgroundColor = vakjeKleur[userTurn];
+        for(let i=0; i<dobbelsVisueel.length; i++) {
+            dobbelsVisueel[i].classList.remove("showdobbel");
+        }
         setTimeout(function kleinePauze() {
             alert("Speler " + userTurn + " heeft gewonnen");
         }, 100);
@@ -260,7 +285,7 @@ function specialeVakjes(userTurn, dobbelTotaal) {
     }   else if(players[userTurn] == 19) {  //herberg, sla een beurt over
         actieTekst.textContent = "De herberg, sla de volgende beurt over";
         beurtenVast[userTurn] = 1;
-    }   else if(players[userTurn] == 31 || players[userTurn == 52]) {
+    }   else if(players[userTurn] == 31 || players[userTurn] == 52) {
         if(players[userTurn] == 31 && beurtenVast[userTurn] == 0) {
             actieTekst.textContent = "De put, sla de volgende 2 beurten over";
         }   else if(players[userTurn] == 52 && beurtenVast[userTurn] == 0) {
